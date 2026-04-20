@@ -1,0 +1,36 @@
+# Import required libraries
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Sample dataset
+data = {
+    'Area': [1000, 1500, 1800, 2400, 3000, 3500, 4000],
+    'Price': [200000, 300000, 360000, 480000, 600000, 700000, 800000]
+}
+
+# Create DataFrame
+df = pd.DataFrame(data)
+
+# Features (Area) and Target (Price)
+X = df[['Area']]
+y = df['Price']
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict house price for a given area
+area = [[2500]]
+predicted_price = model.predict(area)
+
+print("Predicted price for area", area[0][0], "sq ft is:", predicted_price[0])
+
+# Plot the dataset and regression line
+plt.scatter(X, y, color='blue', label='Actual Prices')
+plt.plot(X, model.predict(X), color='red', label='Regression Line')
+plt.xlabel("Area (sq ft)")
+plt.ylabel("Price")
+plt.title("House Price Prediction using Linear Regression")
+plt.legend()
+plt.show()
